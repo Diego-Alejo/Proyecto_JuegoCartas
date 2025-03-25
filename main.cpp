@@ -1,8 +1,4 @@
 #include <iostream>
-// #include <cstdlib>
-// #include <ctime>
-// #include <vector>
-// #include <algorithm>
 
 #define  BG_BLACK    "\x1B[40m"
 #define  BG_RED      "\x1B[41m"
