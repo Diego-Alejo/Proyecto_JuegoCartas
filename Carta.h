@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-// Color definitions
+
 #define  BG_BLACK    "\x1B[40m"
 #define  BG_RED      "\x1B[41m"
 #define  BG_GREEN    "\x1B[42m"
