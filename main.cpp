@@ -109,88 +109,92 @@ int numJugadores;
 			continue;
 		}
 
-            cout << "\nTurno de " << jugadores[siguienteJugador].nombre << endl;
-            cout << "Color requerido: " << nombreColor(colorLider) << endl;
+		cout << "\nTurno de " << jugadores[siguienteJugador].nombre << endl;
+		cout << "Color requerido: " << nombreColor(colorLider) << endl;
             
-            // Mostrar todas las cartas del jugador
-            jugadores[siguienteJugador].mostrarMano();
+// Mostrar todas las cartas del jugador
+
+		jugadores[siguienteJugador].mostrarMano();
             
-            // Jugador selecciona cualquier carta
-            int seleccion;
-            do {
-                cout << "Seleccione una carta (1-" << jugadores[siguienteJugador].mano.size() << "): ";
-                cin >> seleccion;
-                seleccion--; // Ajustar para índice base 0
-            } while (seleccion < 0 || seleccion >= jugadores[siguienteJugador].mano.size());
+// Jugador selecciona cualquier carta
+		int seleccion;
+		do {
+			cout << "Seleccione una carta (1-" << jugadores[siguienteJugador].mano.size() << "): ";
+			cin >> seleccion;
+			seleccion--; // Ajustar para índice base 0
+			} while (seleccion < 0 || seleccion >= jugadores[siguienteJugador].mano.size());
             
-            Carta cartaJugada = jugadores[siguienteJugador].jugarCarta(seleccion);
+			Carta cartaJugada = jugadores[siguienteJugador].jugarCarta(seleccion);
             
-            cout << jugadores[siguienteJugador].nombre << " juega: ";
-            cartaJugada.mostrar();
-            cout << " (" << nombreColor(cartaJugada.color) << ")" << endl;
+			cout << jugadores[siguienteJugador].nombre << " juega: ";
+			cartaJugada.mostrar();
+			cout << " (" << nombreColor(cartaJugada.color) << ")" << endl;
             
-            // Informar si la carta es de diferente color
-            if (cartaJugada.color != colorLider) {
-                cout << "¡Carta de diferente color! No puede ganar esta ronda." << endl;
-            } else if (cartaJugada.poder <= cartaLider.poder) {
-                cout << "Carta del mismo color pero valor insuficiente. No puede ganar esta ronda." << endl;
-            }
-            
-            cartasJugadas.push_back(cartaJugada);
-            jugadoresTurno.push_back(siguienteJugador);
-        }
+// Informar si la carta es de diferente color
+
+		if (cartaJugada.color != colorLider) {
+			cout << "¡Carta de diferente color! No puede ganar esta ronda." << endl;
+			} else if (cartaJugada.poder <= cartaLider.poder) {
+				cout << "Carta del mismo color pero valor insuficiente. No puede ganar esta ronda." << endl;
+				}
+           
+		cartasJugadas.push_back(cartaJugada);
+		jugadoresTurno.push_back(siguienteJugador);
+		}
         
-        // Determinar ganador de la ronda
-        int ganadorRonda = jugadoresTurno[0]; // Por defecto, el jugador que inició
-        int valorMasAlto = cartasJugadas[0].poder;
+// Determinar ganador de la ronda
+	int ganadorRonda = jugadoresTurno[0]; // Por defecto, el jugador que inició
+	int valorMasAlto = cartasJugadas[0].poder;
         
-        for (int i = 1; i < cartasJugadas.size(); i++) {
-            if (cartasJugadas[i].color == colorLider && cartasJugadas[i].poder > valorMasAlto) {
-                valorMasAlto = cartasJugadas[i].poder;
-                ganadorRonda = jugadoresTurno[i];
-            }
-        }
+	for (int i = 1; i < cartasJugadas.size(); i++) {
+		if (cartasJugadas[i].color == colorLider && cartasJugadas[i].poder > valorMasAlto) {
+			valorMasAlto = cartasJugadas[i].poder;
+			ganadorRonda = jugadoresTurno[i];
+			}
+		}
         
-        cout << "\n¡" << jugadores[ganadorRonda].nombre << " gana la ronda!" << endl;
+		cout << "\n¡" << jugadores[ganadorRonda].nombre << " gana la ronda!" << endl;
         
-        // Otorgar cartas al ganador
-        jugadores[ganadorRonda].cartasGanadas += cartasJugadas.size();
-        cout << jugadores[ganadorRonda].nombre << " ha ganado " << jugadores[ganadorRonda].cartasGanadas << " cartas en total." << endl;
+// Otorgar cartas al ganador
+	jugadores[ganadorRonda].cartasGanadas += cartasJugadas.size();
+	cout << jugadores[ganadorRonda].nombre << " ha ganado " << jugadores[ganadorRonda].cartasGanadas << " cartas en total." << endl;
         
-        // La siguiente ronda la inicia el ganador
-        jugadorActual = ganadorRonda;
-        ronda++;
+// La siguiente ronda la inicia el ganador
+	jugadorActual = ganadorRonda;
+	ronda++;
         
-        cout << "\nPresione Enter para continuar...";
-        cin.ignore();
-        cin.get();
-        limpiarPantalla();
-    }
+	cout << "\nPresione Enter para continuar...";
+	cin.ignore();
+	cin.get();
+		limpiarPantalla();
+	}
     
-    // Determinar ganador del juego
-    int maxCartas = 0;
-    vector<int> ganadores;
+// Determinar ganador del juego
+	int maxCartas = 0;
+	vector<int> ganadores;
     
-    // Encontrar el máximo número de cartas ganadas
-    for (int i = 0; i < numJugadores; i++) {
-        cout << jugadores[i].nombre << " ganó " << jugadores[i].cartasGanadas << " cartas." << endl;
-        if (jugadores[i].cartasGanadas > maxCartas) {
-            maxCartas = jugadores[i].cartasGanadas;
-            ganadores.clear();
-            ganadores.push_back(i);
-        } else if (jugadores[i].cartasGanadas == maxCartas) {
-            ganadores.push_back(i);
-        }
-    }
+// Encontrar el máximo número de cartas ganadas
+
+	for (int i = 0; i < numJugadores; i++) {
+	cout << jugadores[i].nombre << " ganó " << jugadores[i].cartasGanadas << " cartas." << endl;
+	if (jugadores[i].cartasGanadas > maxCartas) {
+		maxCartas = jugadores[i].cartasGanadas;
+		ganadores.clear();
+		ganadores.push_back(i);
+		} else if (jugadores[i].cartasGanadas == maxCartas) {
+			ganadores.push_back(i);
+		}
+	}
     
-    // Mostrar resultado final
-    if (ganadores.size() == 1) {
-        cout << "\n¡" << jugadores[ganadores[0]].nombre << " gana el juego con " << maxCartas << " cartas!" << endl;
-    } else {
-        cout << "\n¡Empate! Los siguientes jugadores empataron con " << maxCartas << " cartas:" << endl;
-        for (int i = 0; i < ganadores.size(); i++) {
-            cout << "- " << jugadores[ganadores[i]].nombre << endl;
-        }
-    }
+// Mostrar resultado final
+
+	if (ganadores.size() == 1) {
+		cout << "\n¡" << jugadores[ganadores[0]].nombre << " gana el juego con " << maxCartas << " cartas!" << endl;
+		} else {
+		cout << "\n¡Empate! Los siguientes jugadores empataron con " << maxCartas << " cartas:" << endl;
+		for (int i = 0; i < ganadores.size(); i++) {
+		cout << "- " << jugadores[ganadores[i]].nombre << endl;
+		}
+	}
     
-    return 0;
+	return 0;
