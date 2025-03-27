@@ -16,7 +16,7 @@ int main() {
 
     // Armamos el mazo
     Mazo baraja;
-    baraja.barajar();  // Le damos una revolvida a las cartas
+    baraja.barajar();  // Le damos una barajeada a las cartas
 
     // Preguntamos cuántas personas van a jugar 
     int numJugadores;
