@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <ctime>
 
+
 Mazo::Mazo(){
 	int indice = 0;
 	n = 36;
@@ -33,7 +34,7 @@ void Mazo::barajar() {
 	for (int i = n - 1; i > 0; i--) {
         int j = rand() % (i + 1);
         
-	// Intercambiar Cartas[i] y Cartas[j]
+	// Intercambiamos Cartas en posición [i] con cartas en posición [j]
         
 	Carta temp = Cartas[i];
         Cartas[i] = Cartas[j];

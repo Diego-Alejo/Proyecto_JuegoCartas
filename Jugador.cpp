@@ -1,5 +1,3 @@
-//Clase Jugador.cpp
-
 #include "jugador.h"
 #include <iostream>
 
@@ -32,4 +30,3 @@ Carta Jugador::jugarCarta(int indice) {
 	return carta;
 	}
 
-//fin clase Jugador.cpp

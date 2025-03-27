@@ -6,26 +6,26 @@
 #include "carta.h"
 #include "mazo.h"
 #include "jugador.h"
-#include "utilidades.h"
+#include "Reglas.h"
 
 using namespace std;
 
 int main() {
-// Inicializar el generador de números aleatorios
+// Inicializamos el generador de números aleatorios
 	srand(time(NULL));
 
-// Crear y barajar el mazo
+// Esta parte crea y baraja el mazo
 	Mazo baraja;
 	baraja.barajar();
 
-// Solicitar número de jugadores
+// Solicitamos el número de jugadores que va a jugar esta partida
 int numJugadores;
 	do {
         	cout << "Ingrese el número de jugadores (1-4): ";
 		cin >> numJugadores;
 	} while (numJugadores < 1 || numJugadores > 4);
 
-// Crear jugadores
+// Con el vector creamos el número de jugadores que nos indicaron 
 	vector<Jugador> jugadores;
 	for (int i = 0; i < numJugadores; i++) {
 		string nombre = "Jugador " + to_string(i + 1);
