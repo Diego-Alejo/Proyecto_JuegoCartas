@@ -68,7 +68,13 @@ int main() {
     cout << "¡" << jugadores[jugadorActual].nombre << " arranca el juego" << endl;
 
     // Empezamos el juego
-    int ronda = 1;
+
+cout << "Un jugador comienza tirando una carta de cualquier número y color." << endl;
+cout << "Los demás jugadores deben responder con una carta del mismo color y un número superior al lanzado." << endl;
+cout << "Si se tira una carta de un color distinto o un número inferior, se pierde." << endl;
+cout << "Gana la ronda el jugador que haya tirado la carta de mayor número." << endl;
+cout << "El ganador del juego será el jugador que haya ganado más rondas." << endl;
+	int ronda = 1;
 
     while (true) {
         cout << "\n--- Ronda " << ronda << endl;
