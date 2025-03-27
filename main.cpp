@@ -11,49 +11,49 @@
 using namespace std;
 
 int main() {
-    // Arrancamos los números aleatorios
+    // Arrancamos la vuelta de los números aleatorios, ¡qué chimba!
     srand(time(NULL));
 
-    // Armamos el mazo
+    // Armamos el mazo, parce, pa' jugar con las carticas
     Mazo baraja;
-    baraja.barajar();  // Le damos una barajeada a las cartas
+    baraja.barajar();  // Le damos una revolvida a las cartas, ¿si o qué?
 
-    // Preguntamos cuántos jugadores van a jugar esta partida
+    // Preguntamos cuántos parceros van a jugar esta vuelta
     int numJugadores;
     do {
-        cout << "¿Cuántas personas van a jugar (1-4): ";
+        cout << "¿Cuántos parceros van a jugar, pues? (1-4): ";
         cin >> numJugadores;
         if (numJugadores < 1 || numJugadores > 4) {
-            cout << "¡Tienen que ser entre 1 y 4 jugadores." << endl;
+            cout << "¡Ey, gonorrea! Tienen que ser entre 1 y 4 jugadores." << endl;
         }
     } while (numJugadores < 1 || numJugadores > 4);
 
-    // Creamos los jugadores con este vector, 
+    // Creamos los jugadores con este vector, ¡qué nota!
     vector<Jugador> jugadores;
     for (int i = 0; i < numJugadores; i++) {
-        string nombre = "Jugador " + to_string(i + 1);
+        string nombre = "Parcero " + to_string(i + 1);
         jugadores.push_back(Jugador(nombre));
-        cout << "¡" << nombre << " está listo" << endl;
+        cout << "¡" << nombre << " está listo pa' la vuelta!" << endl;
     }
 
-    // Repartimos todas las carticas
+    // Repartimos todas las carticas, a lo bien
     int cartasPorJugador = baraja.n / numJugadores;
     for (int i = 0; i < cartasPorJugador * numJugadores; i++) {
         jugadores[i % numJugadores].recibirCarta(baraja.repartir());
     }
-    cout << "Cada uno tiene " << cartasPorJugador << " cartas." << endl;
+    cout << "¡Listo parce! Cada uno tiene " << cartasPorJugador << " cartas." << endl;
 
-    // Elegimos quién arranca primero al azar
+    // Elegimos quién arranca primero, al azar, ¡qué suerte la del perro!
     int jugadorActual = rand() % numJugadores;
-    cout << "¡" << jugadores[jugadorActual].nombre << " arranca el juego!" << endl;
+    cout << "¡" << jugadores[jugadorActual].nombre << " arranca el jueguito, pues!" << endl;
 
-    // Empieza el juego
+    // Empieza el juego, ¡qué nervios, parce!
     int ronda = 1;
 
     while (true) {
-        cout << "\n--- Ronda " << ronda << endl;
+        cout << "\n--- Ronda " << ronda << " (¡Qué adrenalina, parce!) ---" << endl;
 
-        // Miramos si todavía hay cartas pa jugar
+        // Miramos si todavía hay cartas pa' jugar, ¿si me entiende?
         bool hayCartas = false;
         for (int i = 0; i < numJugadores; i++) {
             if (!jugadores[i].mano.empty()) {
@@ -63,73 +63,74 @@ int main() {
         }
 
         if (!hayCartas) {
-            cout << "¡Se acabaron las cartas, fin del juego." << endl;
+            cout << "¡Se acabaron las carticas, parce! Fin del juego." << endl;
             break;
         }
 
-        // Si un jugador no tiene cartas pasamos al siguiente
+        // Si un parcero no tiene cartas, pues pasamos al siguiente, ¿si pilla?
         while (jugadores[jugadorActual].mano.empty()) {
             cout << jugadores[jugadorActual].nombre << " ya no tiene cartas, ¡qué boleta!" << endl;
             jugadorActual = (jugadorActual + 1) % numJugadores;
         }
 
-        cout << "Le toca a " << jugadores[jugadorActual].nombre << endl;
+        cout << "Le toca a " << jugadores[jugadorActual].nombre << ", ¡pilas pues!" << endl;
 
-        // Mostramos las cartas que tiene 
+        // Mostramos las cartas que tiene el parcero
         cout << "Tus carticas son, parce:" << endl;
         jugadores[jugadorActual].mostrarMano();
 
-        // Hay qye escoger una carta
+        // El parcero escoge una carta, ¡ojalá la buena!
         int indiceCartaElegida;
         do {
-            cout << "¿Cuál carta vas a tirar? (1-" << jugadores[jugadorActual].mano.size() << "): ";
+            cout << "¿Cuál carta vas a tirar, pues? (1-" << jugadores[jugadorActual].mano.size() << "): ";
             cin >> indiceCartaElegida;
-            indiceCartaElegida--; // Le bajamos 1 porque los arrays empiezan en 0
+            indiceCartaElegida--; // Le bajamos 1 porque los arrays empiezan en 0, ¿si sabe?
             
             if (indiceCartaElegida < 0 || indiceCartaElegida >= jugadores[jugadorActual].mano.size()) {
-                cout << "Esa carta no existe" << endl;
+                cout << "¡Esa carta no existe, parce! Escoge bien." << endl;
             }
         } while (indiceCartaElegida < 0 || indiceCartaElegida >= jugadores[jugadorActual].mano.size());
 
-        // Jugamos la carta escogida
+        // Jugamos la carta que escogió el parcero
         Carta cartaLider = jugadores[jugadorActual].jugarCarta(indiceCartaElegida);
         int colorLider = cartaLider.color;
 
         cout << jugadores[jugadorActual].nombre << " tiró: ";
         cartaLider.mostrar();
-        cout << " (Color " << nombreColor(colorLider) << endl;
+        cout << " (Color " << nombreColor(colorLider) << ", ¡qué chimba!)" << endl;
 
-        // Guardamos las cartas que se van tirando
+        // Guardamos las cartas que se van tirando, ¿si me entiende?
         vector<Carta> cartasJugadas;
         vector<int> jugadoresTurno;
 
         cartasJugadas.push_back(cartaLider);
         jugadoresTurno.push_back(jugadorActual);
 
-        // Ahora les toca a los otros jugadores responder
+        // Ahora les toca a los otros parceros responder
         for (int i = 1; i < numJugadores; i++) {
             int siguienteJugador = (jugadorActual + i) % numJugadores;
 
-            // Si un jugador no tiene cartas pasamos al siguiente
+            // Si un parcero no tiene cartas, pues pasamos al siguiente, ¿si pilla?
             if (jugadores[siguienteJugador].mano.empty()) {
-                cout << jugadores[siguienteJugador].nombre << " ya no tiene cartas" << endl;
+                cout << jugadores[siguienteJugador].nombre << " ya no tiene cartas, ¡qué boleta!" << endl;
                 continue;
             }
 
-            cout << "\nAhora le toca a " << jugadores[siguienteJugador].nombre << endl;
+            cout << "\nAhora le toca a " << jugadores[siguienteJugador].nombre << ", ¡pilas pues!" << endl;
+            cout << "Hay que tirar del color: " << nombreColor(colorLider) << ", ¿si o qué?" << endl;
             
-            // Mostramos las cartas que tiene 
+            // Mostramos las cartas que tiene el parcero
             jugadores[siguienteJugador].mostrarMano();
             
-            //  escoge una carta
+            // El parcero escoge una carta, ¡ojalá la buena!
             int seleccion;
             do {
-                cout << "¿Cuál carta vas a tirar? (1-" << jugadores[siguienteJugador].mano.size() << "): ";
+                cout << "¿Cuál carta vas a tirar, pues? (1-" << jugadores[siguienteJugador].mano.size() << "): ";
                 cin >> seleccion;
-                seleccion--; // Le bajamos 1 porque los arrays empiezan en 0
+                seleccion--; // Le bajamos 1 porque los arrays empiezan en 0, ¿si sabe?
                 
                 if (seleccion < 0 || seleccion >= jugadores[siguienteJugador].mano.size()) {
-                    cout << "Esa carta no existe." << endl;
+                    cout << "¡Esa carta no existe, parce! Escoge bien." << endl;
                 }
             } while (seleccion < 0 || seleccion >= jugadores[siguienteJugador].mano.size());
             
@@ -139,19 +140,19 @@ int main() {
             cartaJugada.mostrar();
             cout << " (Color " << nombreColor(cartaJugada.color) << ")" << endl;
             
-            // Le avisamos si el color lo perjudica
+            // Le avisamos al parcero si la embarró con el color
             if (cartaJugada.color != colorLider) {
-                cout << "Tiraste un color diferente, no puedes ganar esta ronda" << endl;
+                cout << "¡Uy parce, tiraste un color diferente! No podés ganar esta ronda, ¡qué boleta!" << endl;
             } else if (cartaJugada.poder <= cartaLider.poder) {
-                cout << "Tiraste el color correcto, pero el valor es muy bajito. No puedes ganar esta ronda" << endl;
+                cout << "Tiraste el color correcto, pero el valor es muy bajito. No podés ganar esta ronda, ¡qué mala suerte!" << endl;
             }
             
             cartasJugadas.push_back(cartaJugada);
             jugadoresTurno.push_back(siguienteJugador);
         }
         
-        // Miramos quién ganó la ronda
-        int ganadorRonda = jugadoresTurno[0]; // Por defecto colocamos el que arrancó
+        // Miramos quién ganó la ronda, ¡qué emoción!
+        int ganadorRonda = jugadoresTurno[0]; // Por defecto, el parcero que arrancó
         int valorMasAlto = cartasJugadas[0].poder;
         
         for (int i = 1; i < cartasJugadas.size(); i++) {
@@ -161,35 +162,35 @@ int main() {
             }
         }
         
-        cout << jugadores[ganadorRonda].nombre << " ganó la ronda" << endl;
+        cout << "\n¡" << jugadores[ganadorRonda].nombre << " ganó la ronda! ¡Qué chimba, parce!" << endl;
         
-        // Le damos las cartas al ganador
+        // Le damos las carticas al ganador, ¡se las pilló todas!
         jugadores[ganadorRonda].cartasGanadas += cartasJugadas.size();
-        cout << jugadores[ganadorRonda].nombre << " ya tiene " << jugadores[ganadorRonda].cartasGanadas << " cartas ganadas en total" << endl;
+        cout << jugadores[ganadorRonda].nombre << " ya tiene " << jugadores[ganadorRonda].cartasGanadas << " cartas ganadas en total. ¡Qué crack!" << endl;
         
-        // La siguiente ronda la arranca el ganador
+        // La siguiente ronda la arranca el ganador, ¡bien merecido!
         jugadorActual = ganadorRonda;
         ronda++;
         
-        cout << "\nEnter para continuar";
+        cout << "\nApretá Enter pa' seguir, parce...";
         cin.ignore();
         cin.get();
         limpiarPantalla();
     }
     
-    // Vemos quién ganó todo el juego
+    // Miramos quién ganó todo el juego, ¡momento de la verdad!
     int maxCartas = 0;
     vector<int> ganadores;
     
-    // Buscamos quién tiene más carts
+    // Buscamos quién tiene más carticas, ¿si pilla?
     for (int i = 0; i < numJugadores; i++) {
         cout << jugadores[i].nombre << " ganó " << jugadores[i].cartasGanadas << " cartas. ";
         if (jugadores[i].cartasGanadas == 0) {
-            cout << "Ninguna ronda ganada" << endl;
+            cout << "¡Qué boleta, parce!" << endl;
         } else if (jugadores[i].cartasGanadas < 5) {
-            cout << "Algo es algo" << endl;
+            cout << "Algo es algo, ¿cierto?" << endl;
         } else {
-            cout << "Bastantes cartas" << endl;
+            cout << "¡Qué chimba!" << endl;
         }
         
         if (jugadores[i].cartasGanadas > maxCartas) {
@@ -205,14 +206,13 @@ int main() {
     if (ganadores.size() == 1) {
         cout << "\n¡" << jugadores[ganadores[0]].nombre << " ganó todo el juego con " << maxCartas << " cartas!" << endl;
     } else {
-        cout << "\n¡Empate, estos jugadores empataron con " << maxCartas << " cartas:" << endl;
+        cout << "\n¡Empate, gonorrea! Estos parceros empataron con " << maxCartas << " cartas:" << endl;
         for (int i = 0; i < ganadores.size(); i++) {
-            cout << "- " << jugadores[ganadores[i]].nombre << endl;
+            cout << "- " << jugadores[ganadores[i]].nombre << " (¡Qué crack!)" << endl;
         }
     }
     
-    cout << "\n¡Gracias por jugar!" << endl;
+    cout << "\n¡Gracias por jugar, parceros! ¡Hasta la próxima!" << endl;
     return 0;
 }
-
 
