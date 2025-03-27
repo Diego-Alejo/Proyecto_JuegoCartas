@@ -13,3 +13,4 @@ Carta::Carta(int poder, int color) {
 void Carta::mostrar() {
     std::cout << WHITE << paleta[color] << poder << RESET << " ";
 }
+
