@@ -1,49 +1,52 @@
 #include "mazo.h"
-#include <cstdlib>
-#include <ctime>
+#include <iostream>
 
+// Constructor del mazo
 Mazo::Mazo() {
-    int indice = 0;
-    n = 36;
-    
-    for(int i = 0; i < 9; i++) {
-        for(int j = 0; j < 4; j++) {
-            indice = (4*i)+j;
-            Cartas[indice].poder = i+1;
-            Cartas[indice].color = j;
+    // Creamos todas las cartas posibles
+    for (int color = 0; color < 4; color++) {
+        for (int poder = 1; poder <= 10; poder++) {
+            cartas.push_back(Carta(color, poder));
         }
     }
-}
-
-void Mazo::mostrar() {
-    int indice = 0;
     
-    for(int i = 0; i < 9; i++) {
-        for(int j = 0; j < 4; j++) {
-            indice = (4*i)+j;
-            Cartas[indice].mostrar();
-        }
-        std::cout << std::endl;
-    }
+    n = cartas.size();  // Guardamos cuántas cartas hay
 }
 
+// Barajamos las cartas
 void Mazo::barajar() {
-    srand(time(NULL));
-    for (int i = n - 1; i > 0; i--) {
-        int j = rand() % (i + 1);
-        // Intercambiar las posición con Cartas[i] y Cartas[j]
-        Carta temp = Cartas[i];
-        Cartas[i] = Cartas[j];
-        Cartas[j] = temp;
-    }
+    // Usamos random_shuffle pa' mezclar todo bien 
+    random_shuffle(cartas.begin(), cartas.end());
+    std::cout << "Mazo barajado." << std::endl;
 }
 
+// Reparte una carta
 Carta Mazo::repartir() {
-    if (n <= 0) {
-        std::cout << "No hay más cartas en el mazo." << std::endl;
-        return Carta(0, 0);
+    if (cartas.empty()) {
+        std::cout << "Ya no hay cartas" << std::endl;
+        return Carta();  // Devolvemos una carta por defecto si no hay más
     }
     
-    n--;
-    return Cartas[n];
+    Carta c = cartas.back();  // Sacamos la última carta
+    cartas.pop_back();  // La quitamos del mazo
+    n--;  // Actualizamos el contador
+    
+    return c;  // Devolvemos la carta que sacamos
 }
+
+// Muestra todas las cartas del mazo
+void Mazo::mostrar() {
+    std::cout << "El mazo tiene " << n << " cartas:" << std::endl;
+    
+    for (int i = 0; i < n; i++) {
+        cartas[i].mostrar();
+        
+        // Cada 10 cartas saltamos de línea
+        if ((i + 1) % 10 == 0) {
+            std::cout << std::endl;
+        }
+    }
+    
+    std::cout << std::endl;
+}
+

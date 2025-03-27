@@ -1,13 +1,9 @@
 #include "carta.h"
 
-Carta::Carta() {
-    this->poder = 0;
-    this->color = 0;
-}
-
-Carta::Carta(int poder, int color) {
-    this->poder = poder;
-    this->color = color;
+// Constructor de la carta
+Carta::Carta(int _color, int _poder) {
+    color = _color;
+    poder = _poder;
 }
 
 void Carta::mostrar() {

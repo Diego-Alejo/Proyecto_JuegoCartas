@@ -1,11 +1,8 @@
-// Esta es la clase Carta, es como la cédula de cada carta del juego
 #ifndef CARTA_H
 #define CARTA_H
 
 #include <iostream>
 #include <string>
-using namespace std;
-
 #define  BG_BLACK    "\x1B[40m"
 #define  BG_RED      "\x1B[41m"
 #define  BG_GREEN    "\x1B[42m"
@@ -20,23 +17,20 @@ using namespace std;
 
 class Carta {
 public:
-    // Estos son los datos de la carta
+    // Estos son los datos de la carta, ¿si pilla?
     int color;  // 0=Rojo, 1=Azul, 2=Verde, 3=Amarillo
     int poder;  // Qué tan fuerte es la carta, entre 1 y 10
     
-    string paleta[4] = {BG_RED, BG_BLUE, BG_GREEN, BG_AMARILLO};
     
-    // Este es el constructor para "construir las cartas"
-    Carta(int _color = 0, int _poder = 1) {
-        color = _color;
-        poder = _poder;
-    }
+    std::string paleta[4] = {BG_RED, BG_BLUE, BG_GREEN, BG_AMARILLO};
+    
+    // Este es el constructor
+    Carta(int _color = 0, int _poder = 1);
     
     // Esta función muestra la carta con colores
-    void mostrar() {
-        cout << WHITE << paleta[color] << poder << RESET << " ";
-    }
+    void mostrar();
 };
 
-#endif
+#endif // CARTA_H
+
 
