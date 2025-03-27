@@ -4,7 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include <cstdlib>
-#include "carta.h"
+#include "./Carta.h"
 
 class Mazo {
 public:

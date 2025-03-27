@@ -1,4 +1,4 @@
-#include "carta.h"
+#include "./Carta.h"
 
 // Constructor de la carta
 Carta::Carta(int _color, int _poder) {

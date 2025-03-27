@@ -1,4 +1,4 @@
-#include "reglas.h"
+#include "./Reglas.h"
 
 // Limpia la pantalla
 void limpiarPantalla() {

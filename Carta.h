@@ -17,7 +17,7 @@
 
 class Carta {
 public:
-    // Estos son los datos de la carta, ¿si pilla?
+    // Estos son los datos de la carta
     int color;  // 0=Rojo, 1=Azul, 2=Verde, 3=Amarillo
     int poder;  // Qué tan fuerte es la carta, entre 1 y 10
     

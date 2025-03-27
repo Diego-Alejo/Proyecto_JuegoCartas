@@ -16,7 +16,7 @@ int main() {
 
     // Armamos el mazo
     Mazo baraja;
-    baraja.barajar();  // Le damos una revolvida a las cartas, ¿si o qué?
+    baraja.barajar();  // Le damos una revolvida a las cartas
 
     // Preguntamos cuántas personas van a jugar 
     int numJugadores;
@@ -79,7 +79,7 @@ int main() {
         cout << "Tus carticas son, parce:" << endl;
         jugadores[jugadorActual].mostrarMano();
 
-        // El parcero escoge una carta
+        // Se escoge una carta
         int indiceCartaElegida;
         do {
             cout << "¿Cuál carta vas a tirar? (1-" << jugadores[jugadorActual].mano.size() << "): ";
@@ -168,7 +168,7 @@ int main() {
         jugadores[ganadorRonda].cartasGanadas += cartasJugadas.size();
         cout << jugadores[ganadorRonda].nombre << " ya tiene " << jugadores[ganadorRonda].cartasGanadas << " cartas ganadas en total" << endl;
         
-        // La siguiente ronda la arranca el ganador, ¡bien merecido!
+        // La siguiente ronda la arranca el ganador
         jugadorActual = ganadorRonda;
         ronda++;
         
@@ -215,4 +215,3 @@ int main() {
     cout << "\nGracias por jugar" << endl;
     return 0;
 }
-

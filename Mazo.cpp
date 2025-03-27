@@ -1,4 +1,4 @@
-#include "mazo.h"
+#include "./Mazo.h"
 #include <iostream>
 
 // Constructor del mazo

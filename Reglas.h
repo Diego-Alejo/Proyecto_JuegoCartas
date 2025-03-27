@@ -3,7 +3,7 @@
 
 #include <string>
 #include <cstdlib>
-#include "carta.h"
+#include "./Carta.h"
 
 // Esta función limpia la pantalla
 void limpiarPantalla();

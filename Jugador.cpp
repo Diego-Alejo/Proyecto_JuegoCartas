@@ -1,4 +1,4 @@
-#include "jugador.h"
+#include "./Jugador.h"
 #include <iostream>
 
 // Constructor del jugador
