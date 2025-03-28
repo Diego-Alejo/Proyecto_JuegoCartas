@@ -50,6 +50,13 @@ int main() {
     // Empieza el juego
     int ronda = 1;
 
+cout << "¿Cómo se juega?:" << endl;
+cout << "Hay 36 cartas divididas entre 4 colores y 9 números. Un jugador comienza tirando una carta de cualquier color." << endl;
+cout << "Los demás jugadores deben responder con una carta de ese mismo color y un número superior para ganar." << endl;
+cout << "Si se tira una carta de un color diferente o un número inferior se pierde." << endl;
+cout << "Gana la ronda quien haya tirado la carta de número más alto." << endl;
+cout << "El ganador del juego será quien haya ganado más rondas/cartas." << endl;
+
     while (true) {
         cout << "\n--- Ronda " << ronda << endl;
 
